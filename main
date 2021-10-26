@@ -1,0 +1,9 @@
+%Hechos
+esUn(Persona,Cliente)
+esUn(Empresa,Cliente)
+esUn(IntitucionesPublicas,Cliente)
+esUn(BancoCostaRica,BancoPublico)
+esUn(BancoPopular,BancoPublico)
+adquiereun(Cliente,ProductoFinanciero)
+
+%Reglas
