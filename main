@@ -1,9 +1,58 @@
 %Hechos
-esUn(Persona,Cliente)
-esUn(Empresa,Cliente)
-esUn(IntitucionesPublicas,Cliente)
-esUn(BancoCostaRica,BancoPublico)
-esUn(BancoPopular,BancoPublico)
-adquiereun(Cliente,ProductoFinanciero)
+
+es_Un(persona, cliente).
+es_Un(empresa, cliente).
+es_Un(intitucionesPublicas, cliente).
+
+adquiere_Un(cliente, productoFinanciero).
+tiene_Un(productoFinanciero, emisor).
+es_Negociable_Con(productoFinanciero, bolsaNacionaldeValores).
+es_Un(productoFinanciero, instrumentoFinanciero).
+
+puede_Dar(emisor, retribucionFinanciera).
+requiere(retribucionFinanciera, cliente).
+requiere(emisor, dinero).
+es_Un(dinero,inversion).
+
+es_Un(codigo_de_comercio, legislacion).
+regula(legislacion,titulo_valores).
+es_Un(titulo_valores, instrumentoFinanciero).
+tiene_Un(instrumentoFinanciero,lapso_de_tiempo).
+dura_Un(lapso_de_tiempo,plazo).
+
+%------------------------------------------------
+es_Un(bancoCostaRica, bancoPublico).
+es_Un(bancoPopular, bancoPublico).
+
+emite(bancoPublico,certificado_de_deposito_a_plazo).
+
+emite(la_nacion,certificado_de_deposito_a_plazo).
+emite(holcim,certificado_de_deposito_a_plazo).
+emite(fifco,certificado_de_deposito_a_plazo).
+
+emite(la_nacion,certificado_de_inversion).
+emite(holcim,certificado_de_inversion).
+emite(fifco,certificado_de_inversion).
+
+emite(la_nacion,accion).
+emite(holcim,accion).
+emite(fifco,accion).
+
+es_Un(accion, participacion_en_propiedad_de_la_compania).
+es_Un(accion,instrumento_con_pago_de_dividendos).
+es_Un(instrumento_con_pago_de_dividendos,patrimonio).
+
+emite(ministerio_de_hacienda, certificado_de_deuda_publica).
+
+es_Un(certificado_de_deuda_publica, instrumento_con_pago_de_intereses).
+es_Un(certificado_de_deposito_a_plazo, instrumento_con_pago_de_intereses).
+es_Un(certificado_de_inversion, instrumento_con_pago_de_intereses).
+
+es_Un(instrumento_con_pago_de_intereses,pasivo).
+es_Un(instrumento_con_pago_de_intereses,prestamo_a_plazo).
+
+es_Un(instrumento_con_pago_de_intereses, instrumentoFinanciero).
+es_Un(instrumento_con_pago_de_dividendos, instrumentoFinanciero).
 
 %Reglas
+
