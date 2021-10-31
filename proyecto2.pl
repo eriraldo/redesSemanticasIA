@@ -1,4 +1,9 @@
 %Hechos
+es_Un(pasivo).
+es_Un(patrimonio).
+es_Un(participacion_en_propiedad_de_la_compania).
+es_Un(prestamo_a_plazo).
+
 es_Un(persona, cliente).
 es_Un(empresa, cliente).
 es_Un(intitucionesPublicas, cliente).
@@ -52,3 +57,4 @@ emite(ministerio_de_hacienda, certificado_de_deuda_publica).
 %Reglas
 es_un_instrumentoFinanciero(A) :- es_Un(A, instrumentoFinanciero).
 es_un_instrumentoFinanciero(A) :- es_Un(A, B), es_Un(B, instrumentoFinanciero).
+es_un_instrumentoFinanciero(A) :- es_Un(A), es_Un(B, A), es_un_instrumentoFinanciero(B).
