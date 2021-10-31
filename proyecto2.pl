@@ -58,3 +58,12 @@ emite(ministerio_de_hacienda, certificado_de_deuda_publica).
 es_un_instrumentoFinanciero(A) :- es_Un(A, instrumentoFinanciero).
 es_un_instrumentoFinanciero(A) :- es_Un(A, B), es_Un(B, instrumentoFinanciero).
 es_un_instrumentoFinanciero(A) :- es_Un(A), es_Un(B, A), es_un_instrumentoFinanciero(B).
+
+puede_comprar(A, B) :- es_Un(A, cliente), es_un_instrumentoFinanciero(B).
+
+puede_negociarse_con(A, B) :- es_un_instrumentoFinanciero(A), es_un_instrumentoFinanciero(productoFinanciero), es_Negociable_Con(productoFinanciero, B).
+
+% primerPregunta
+% Una person compra un Certificado de Depósito a Plazo de La Nación, 
+% ¿lo puede negociar en Bolsa?
+% puede_comprar(persona, certificado_de_deposito_a_plazo), emite(la_nacion, certificado_de_deposito_a_plazo), puede_negociarse_con(certificado_de_deposito_a_plazo, bolsaNacionaldeValores).
