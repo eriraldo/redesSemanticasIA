@@ -50,3 +50,5 @@ emite(fifco,accion).
 emite(ministerio_de_hacienda, certificado_de_deuda_publica).
 
 %Reglas
+es_un_instrumentoFinanciero(A) :- es_Un(A, instrumentoFinanciero).
+es_un_instrumentoFinanciero(A) :- es_Un(A, B), es_Un(B, instrumentoFinanciero).
