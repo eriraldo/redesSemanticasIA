@@ -61,9 +61,14 @@ es_un_instrumentoFinanciero(A) :- es_Un(A), es_Un(B, A), es_un_instrumentoFinanc
 
 puede_comprar(A, B) :- es_Un(A, cliente), es_un_instrumentoFinanciero(B).
 
-puede_negociarse_con(A, B) :- es_un_instrumentoFinanciero(A), es_un_instrumentoFinanciero(productoFinanciero), es_Negociable_Con(productoFinanciero, B).
+puede_negociarse_con(A, B) :- es_un_instrumentoFinanciero(A), es_un_instrumentoFinanciero(C), es_Negociable_Con(C, B).
 
 % primerPregunta
 % Una person compra un Certificado de Depósito a Plazo de La Nación, 
 % ¿lo puede negociar en Bolsa?
 % puede_comprar(persona, certificado_de_deposito_a_plazo), emite(la_nacion, certificado_de_deposito_a_plazo), puede_negociarse_con(certificado_de_deposito_a_plazo, bolsaNacionaldeValores).
+
+tiene_regulaciones_para(A, B) :- es_Un(A, legislacion), regula(legislacion, C), es_un_instrumentoFinanciero(C), es_un_instrumentoFinanciero(B).
+
+% terceraPregunta
+% ¿Hay regulación en el Código Penal para las acciones?
