@@ -1,4 +1,25 @@
-%Hechos
+/*
+------------------------------------------------------
+|                                                    | 
+|        PROYECTO # 2: REDES SEMÁNTICAS              |
+|        CURSO: INTELIGENCIA ARTIFICIAL              |
+|        PROFESOR: JORGE VARGAS CALVO                |
+|                                                    |
+|        INTEGRANTES:                                |
+|           STEVEN RETANA CEDEÑO - 2017144537        |    
+|           ERICK ELIZONDO       - 20........        |
+|           ERICK SALAZAR        - 20........        |
+|           DAVID ESPINOZA       - 20........        |
+------------------------------------------------------
+*/
+
+/*
+------------------------------------------------------
+|                   Conceptos                        |
+|       Productos financieros en Costa Rica          | 
+------------------------------------------------------
+*/
+
 es_Un(pasivo).
 es_Un(patrimonio).
 es_Un(participacion_en_propiedad_de_la_compania).
@@ -13,7 +34,7 @@ es_Un(productoFinanciero, instrumentoFinanciero).
 es_Un(dinero,inversion).
 es_Un(codigo_de_comercio, legislacion).
 es_Un(bancoCostaRica, bancoPublico).
-es_Un(bancoPopular, bancoPublico).
+
 es_Un(titulo_valores, instrumentoFinanciero).
 es_Un(accion, participacion_en_propiedad_de_la_compania).
 es_Un(accion,instrumento_con_pago_de_dividendos).
@@ -42,6 +63,13 @@ regula(legislacion,titulo_valores).
 
 dura_Un(lapso_de_tiempo,plazo).
 
+
+/*
+------------------------------------------------------
+|                     Hechos                         |
+------------------------------------------------------
+*/
+
 emite(bancoPublico,certificado_de_deposito_a_plazo).
 emite(la_nacion,certificado_de_deposito_a_plazo).
 emite(holcim,certificado_de_deposito_a_plazo).
@@ -54,21 +82,55 @@ emite(holcim,accion).
 emite(fifco,accion).
 emite(ministerio_de_hacienda, certificado_de_deuda_publica).
 
-%Reglas
-es_un_instrumentoFinanciero(A) :- es_Un(A, instrumentoFinanciero).
-es_un_instrumentoFinanciero(A) :- es_Un(A, B), es_Un(B, instrumentoFinanciero).
-es_un_instrumentoFinanciero(A) :- es_Un(A), es_Un(B, A), es_un_instrumentoFinanciero(B).
+/*
+------------------------------------------------------
+|                     Reglas                         |
+------------------------------------------------------
+*/
 
-puede_comprar(A, B) :- es_Un(A, cliente), es_un_instrumentoFinanciero(B).
+es_un_instrumentoFinanciero(A) :- 
+    es_Un(A, instrumentoFinanciero).
 
-puede_negociarse_con(A, B) :- es_un_instrumentoFinanciero(A), es_un_instrumentoFinanciero(C), es_Negociable_Con(C, B).
+es_un_instrumentoFinanciero(A) :- 
+    es_Un(A, B), es_Un(B, instrumentoFinanciero).
 
-% primerPregunta
-% Una person compra un Certificado de Depósito a Plazo de La Nación, 
-% ¿lo puede negociar en Bolsa?
+es_un_instrumentoFinanciero(A) :- 
+    es_Un(A), es_Un(B, A), es_un_instrumentoFinanciero(B).
+
+puede_comprar(A, B) :- 
+    es_Un(A, cliente), 
+    es_un_instrumentoFinanciero(B).
+
+puede_negociarse_con(A, B) :- 
+    es_un_instrumentoFinanciero(A), 
+    es_un_instrumentoFinanciero(C), 
+    es_Negociable_Con(C, B).
+
+
+
+/*
+------------------------------------------------------
+|           Extracción de conocimiento               |
+------------------------------------------------------
+*/
+
+
+/* Pregunta 1: "Una persona compra un Certificado de Depósito a Plazo de La Nación, ¿Lo puede negociar en bolsa?" */
+
 % puede_comprar(persona, certificado_de_deposito_a_plazo), emite(la_nacion, certificado_de_deposito_a_plazo), puede_negociarse_con(certificado_de_deposito_a_plazo, bolsaNacionaldeValores).
 
-tiene_regulaciones_para(A, B) :- es_Un(A, legislacion), regula(legislacion, C), es_un_instrumentoFinanciero(C), es_un_instrumentoFinanciero(B).
 
-% terceraPregunta
-% ¿Hay regulación en el Código Penal para las acciones?
+/* Pregunta 2: "Una empresa compra acciones de FIFCO ¿Recibirá acciones?" */
+
+recibe_intereses(Empresa) :- 
+    emite(Empresa, accion),
+    es_Un(accion, instrumento_con_pago_de_intereses).
+
+
+/* Pregunta 3: "¿Hay regulación en el Código Penal para las acciones?" */
+
+tiene_regulaciones_para(A, B) :- 
+    es_Un(A, legislacion), 
+    regula(legislacion, C), 
+    es_un_instrumentoFinanciero(C), 
+    es_un_instrumentoFinanciero(B).
