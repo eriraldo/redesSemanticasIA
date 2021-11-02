@@ -118,12 +118,16 @@ puede_negociarse_con(A, B) :-
 /* Pregunta 1: "Una persona compra un Certificado de Depósito a Plazo de La Nación, ¿Lo puede negociar en bolsa?" */
 
 % puede_comprar(persona, certificado_de_deposito_a_plazo), emite(la_nacion, certificado_de_deposito_a_plazo), puede_negociarse_con(certificado_de_deposito_a_plazo, bolsaNacionaldeValores).
+/* A puede comprar B que es emitida por C ¿ se puede negociar con D? */
+puede_comprar_de_y_negociar_en(A, B, C, D) :-
+    puede_comprar(A, B),
+    emite(C, B),
+    puede_negociarse_con(B, D).
 
+/* Pregunta 2: "Una empresa compra acciones de FIFCO ¿Recibirá intereses?" */
 
-/* Pregunta 2: "Una empresa compra acciones de FIFCO ¿Recibirá acciones?" */
-
-recibe_intereses(Empresa) :- 
-    emite(Empresa, accion),
+recibe_intereses(Entidad) :- 
+    emite(Entidad, accion),
     es_Un(accion, instrumento_con_pago_de_intereses).
 
 
