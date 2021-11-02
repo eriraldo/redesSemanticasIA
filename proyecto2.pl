@@ -7,9 +7,9 @@
 |                                                    |
 |        INTEGRANTES:                                |
 |           STEVEN RETANA CEDEÑO - 2017144537        |    
-|           ERICK ELIZONDO       - 20........        |
-|           ERICK SALAZAR        - 20........        |
-|           DAVID ESPINOZA       - 20........        |
+|           ERICK ELIZONDO       - 2018250453        |
+|           ERICK SALAZAR        - 2016139218        |
+|           DAVID ESPINOZA       - 2016012024        |
 ------------------------------------------------------
 */
 
