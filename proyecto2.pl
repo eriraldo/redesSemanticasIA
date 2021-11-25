@@ -21,7 +21,6 @@
 */
 
 es_Un(pasivo).
-es_Un(patrimonio).
 es_Un(participacion_en_propiedad_de_la_compania).
 es_Un(prestamo_a_plazo).
 
@@ -31,14 +30,13 @@ es_Un(intitucionesPublicas, cliente).
 es_Un(bancoCostaRica, bancoPublico).
 es_Un(bancoPopular, bancoPublico).
 es_Un(productoFinanciero, instrumentoFinanciero).
-es_Un(dinero,inversion).
+es_Un(dinero, inversion).
 es_Un(codigo_de_comercio, legislacion).
 es_Un(bancoCostaRica, bancoPublico).
 
 es_Un(titulo_valores, instrumentoFinanciero).
 es_Un(accion, participacion_en_propiedad_de_la_compania).
 es_Un(accion,instrumento_con_pago_de_dividendos).
-es_Un(instrumento_con_pago_de_dividendos,patrimonio).
 es_Un(certificado_de_deuda_publica, instrumento_con_pago_de_intereses).
 es_Un(certificado_de_deposito_a_plazo, instrumento_con_pago_de_intereses).
 es_Un(certificado_de_inversion, instrumento_con_pago_de_intereses).
@@ -63,6 +61,7 @@ regula(legislacion,titulo_valores).
 
 dura_Un(lapso_de_tiempo,plazo).
 
+pertenece_a(instrumento_con_pago_de_dividendos,patrimonio).
 
 /*
 ------------------------------------------------------
@@ -132,9 +131,8 @@ recibe_intereses(Entidad) :-
 
 
 /* Pregunta 3: "¿Hay regulación en el Código Penal para las acciones?" */
-
 tiene_regulaciones_para(A, B) :- 
     es_Un(A, legislacion), 
-    regula(legislacion, C), 
-    es_un_instrumentoFinanciero(C), 
+    regula(legislacion, titulo_valores), 
+    es_un_instrumentoFinanciero(titulo_valores), 
     es_un_instrumentoFinanciero(B).
